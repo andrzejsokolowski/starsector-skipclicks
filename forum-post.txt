@@ -1,0 +1,60 @@
+Subject: [0.98a] SkipClicks 0.1.0 - fewer clicks for surveys, salvage and battle loot
+
+[center][size=28pt][url=https://github.com/andrzejsokolowski/starsector-skipclicks/releases/latest][b]SkipClicks[/b][/url][/size]
+[img]https://raw.githubusercontent.com/andrzejsokolowski/starsector-skipclicks/main/graphics/icons/skipclicks.png[/img]
+[url=https://github.com/andrzejsokolowski/starsector-skipclicks/releases/latest][img]https://img.shields.io/github/downloads/andrzejsokolowski/starsector-skipclicks/total?style=for-the-badge&label=download[/img][/url]  [url=https://github.com/andrzejsokolowski/starsector-skipclicks][img]https://img.shields.io/github/v/release/andrzejsokolowski/starsector-skipclicks?display_name=tag&sort=semver&style=for-the-badge&label=source[/img][/url]
+[/center]
+[center][b]
+WHAT DOES THIS MOD DO?
+Surveying a planet, salvaging a wreck and looting after a battle each take several screens of "Continue".
+SkipClicks cuts the ones that never ask you anything.
+Needs LunaLib. PatchLib is optional (only for the after-battle part).
+[/b][/center]
+[center]
+[hr][center][size=12pt][b]Planet survey[/b][/size][/center][hr]
+[list]
+[li]Unsurveyed planets with no colony get a [b]Fast survey[/b] option. It shows the supplies it uses.[/li]
+[li]One click pays the survey cost and runs the full survey. No survey screen, no animation, no Continue.[/li]
+[li]The planet dialog shows the survey data you got, the planet's conditions and the experience, with Establish a colony and Explore the ruins ready to pick.[/li]
+[li]Same cost, same survey data and same experience as a normal survey. The normal Perform a survey option is still there.[/li]
+[li]Greyed out, with the missing crew, heavy machinery or supplies in the tooltip, when your fleet lacks them.[/li]
+[li]Optional: close the planet dialog after a fast survey when there are no ruins to explore.[/li]
+[/list]
+
+[hr][center][size=12pt][b]Salvage[/b][/size][/center][hr]
+[list]
+[li]Debris fields skip Assess, and derelicts, stations and caches skip Explore. You land on the salvage cost screen with Begin salvage operations.[/li]
+[li]Never skipped when automated defenses guard the target, so you can still leave before the fight.[/li]
+[li]When a salvage accident costs crew or heavy machinery, the loot screen opens right away. The losses go to the message log.[/li]
+[/list]
+
+[hr][center][size=12pt][b]After battle[/b][/size][/center][hr]
+[list]
+[li]With PatchLib installed: Continue on the ship recovery screen opens the loot screen right away, instead of a screen with only Pick through the wreckage.[/li]
+[li]Credits found in the wreckage go to the message log.[/li]
+[/list]
+
+[hr][center][size=12pt][b]Settings and compatibility[/b][/size][/center][hr]
+[list]
+[li]Every skip has its own switch in the LunaLib settings.[/li]
+[li]The survey and salvage parts step aside when another mod adds its own options to those screens.[/li]
+[li]Works with Nexerelin's battle screen.[/li]
+[li]Safe to add to or remove from a game in progress.[/li]
+[/list]
+[/center]
+
+[spoiler=AI use disclaimer]Some or all assets and code in this mod were created using AI tools:
+[list]
+[li]Code: Claude Code (Claude Opus 5.5)[/li]
+[li]Text (readme and this post): Claude Code (Claude Opus 5.5)[/li]
+[li]Settings icon: drawn by a script written with Claude Code (Claude Opus 5.5)[/li][/list]
+[/spoiler]
+
+[spoiler=License]
+This mod is under the CC0 (Creative Commons Zero) License, allowing you to do whatever you want with the code, without giving any credit to anyone.
+[/spoiler]
+
+[spoiler=Version log]
+[b]0.1.0[/b]
+[list][li]First release.[/li][/list]
+[/spoiler]
