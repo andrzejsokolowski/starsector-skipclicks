@@ -26,8 +26,10 @@ names the game folder), runs the checks and writes `SkipClicks.zip` in this fold
 - `src/skipclicks/rulecmd/SKC_FastSurvey` - the survey, the same calls as the game's survey screen
   (`PlanetSurveyPanel.actionPerformed` and `applySurveyResults`): consumed cost, `Misc.setFullySurveyed`,
   `Misc.addSurveyDataFor`, survey XP, `ListenerUtil.reportPlayerSurveyedPlanet`.
-- `src/skipclicks/rulecmd/SKC_Salvage` - skips Explore or Assess only when the entity has no defenders
-  and every PopulateSalvageOptions1 rule that matches is vanilla's (another mod's option means no skip).
+- `src/skipclicks/rulecmd/SKC_Salvage` - fires PopulateSalvageOptions1 like vanilla (so script-only mod
+  rules such as Exotica's and RapeSector's still run), then skips Explore or Assess only when the screen
+  offers just salExplore and defaultLeave, the entity has no defenders, no mod rule on that trigger has
+  its own text, and the best DialogOptionSelected rule for salExplore is vanilla's `sal_noDefenders`.
   Skips the accident report by selecting salPerform after vanilla's `SalvageEntity checkAccidents`.
 - `src/skipclicks/patches/BattleLootPatch` - PatchLib @After on
   `FleetInteractionDialogPluginImpl.optionSelected` (subtype match, most derived call only): after

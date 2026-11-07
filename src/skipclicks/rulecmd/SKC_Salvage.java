@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CargoAPI;
 import com.fs.starfarer.api.campaign.InteractionDialogAPI;
+import com.fs.starfarer.api.campaign.OptionPanelAPI;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.campaign.rules.MemKeys;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
@@ -30,10 +31,10 @@ import skipclicks.Settings;
 /**
  * SKC_Salvage skipExplore|checkAccidents
  *
- * skipExplore replaces vanilla sal_noHostileNearby (SalvageCheckHostile). When the entity has no
- * defenders and only vanilla's own options would show (Explore or Assess, and Leave), it selects
- * salExplore at once, which leads to the salvage cost screen. Otherwise it does exactly what
- * sal_noHostileNearby does, so options added by other mods still appear.
+ * skipExplore replaces vanilla sal_noHostileNearby (SalvageCheckHostile) and does what it does, so every
+ * mod's PopulateSalvageOptions1 rules still run. Then, when the screen offers only Explore (or Assess) and
+ * Leave, the entity has no defenders and Explore leads where vanilla's does, it selects salExplore at once,
+ * which leads to the salvage cost screen.
  *
  * checkAccidents replaces vanilla sal_optionCheckAccidents (DialogOptionSelected salSalvage). It runs
  * the vanilla accident check, and when that stops on the damage report ("Continue" to salPerform),
@@ -43,9 +44,12 @@ public class SKC_Salvage extends BaseCommandPlugin {
 
     private static final Logger log = Global.getLogger(SKC_Salvage.class);
 
-    /** Rules that vanilla 0.98a fires on PopulateSalvageOptions1. Anything else means another mod adds an option. */
+    /** Rules that vanilla 0.98a fires on PopulateSalvageOptions1. */
     private static final Set<String> VANILLA_EXPLORE_RULES =
             new HashSet<>(Arrays.asList("sal_defaultLeave1", "sal_explore", "sal_assess"));
+
+    /** Vanilla's rule for Explore on a target without defenders: on to the salvage cost screen. */
+    private static final String VANILLA_EXPLORE_OUTCOME = "sal_noDefenders";
 
     @Override
     public boolean execute(String ruleId, InteractionDialogAPI dialog, List<Token> params, Map<String, MemoryAPI> memoryMap) {
@@ -64,36 +68,76 @@ public class SKC_Salvage extends BaseCommandPlugin {
 
     private static void skipExplore(InteractionDialogAPI dialog, Map<String, MemoryAPI> memoryMap) {
         MemoryAPI local = memoryMap.get(MemKeys.LOCAL);
-        // The vanilla rule's first line.
+        // The vanilla rule, line for line: every mod's PopulateSalvageOptions1 rules run as usual.
         local.set("$salvageLeaveText", "Leave", 0);
+
+        boolean wanted = false;
+        boolean textFromMods = false;
+        try {
+            wanted = skipWanted(dialog);
+            if (wanted) textFromMods = modRuleAddsText(dialog, memoryMap);
+        } catch (Throwable t) {
+            log.error("SkipClicks: could not check the salvage rules, showing the options as usual", t);
+            wanted = false;
+        }
+
+        FireAll.fire(null, dialog, memoryMap, "PopulateSalvageOptions1");
+        if (!wanted || textFromMods) return;
 
         boolean skip = false;
         try {
-            skip = canSkipExplore(dialog, memoryMap, local);
+            skip = onlyVanillaChoice(dialog, memoryMap, local);
         } catch (Throwable t) {
             log.error("SkipClicks: could not check the salvage options, showing them as usual", t);
         }
-        if (!skip) {
-            FireAll.fire(null, dialog, memoryMap, "PopulateSalvageOptions1");
-            return;
-        }
-        select(dialog, memoryMap, "salExplore");
+        if (skip) select(dialog, memoryMap, "salExplore");
     }
 
-    private static boolean canSkipExplore(InteractionDialogAPI dialog, Map<String, MemoryAPI> memoryMap, MemoryAPI local) {
+    private static boolean skipWanted(InteractionDialogAPI dialog) {
         SectorEntityToken entity = dialog.getInteractionTarget();
         boolean debris = entity != null && Entities.DEBRIS_FIELD_SHARED.equals(entity.getCustomEntityType());
-        if (debris ? !Settings.skipAssessDebris() : !Settings.skipExplore()) return false;
+        return debris ? Settings.skipAssessDebris() : Settings.skipExplore();
+    }
+
+    /** A mod rule with its own text on this screen is a message for the player: keep the screen. */
+    private static boolean modRuleAddsText(InteractionDialogAPI dialog, Map<String, MemoryAPI> memoryMap) {
+        List<RuleAPI> matches = Global.getSector().getRules().getAllMatching(null, "PopulateSalvageOptions1", dialog, memoryMap);
+        for (RuleAPI rule : matches) {
+            if (VANILLA_EXPLORE_RULES.contains(rule.getId())) continue;
+            List<String> text = rule.getText();
+            if (text == null) continue;
+            for (String line : text) {
+                if (line != null && !line.trim().isEmpty()) return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * True when the screen, after every mod's rules ran, offers only Explore (or Assess) and Leave, the target
+     * has no defenders, and Explore would do what vanilla's sal_noDefenders does. Rules that only run scripts
+     * (Exotica Technologies, RapeSector and others hook this screen) do not stop the skip.
+     */
+    private static boolean onlyVanillaChoice(InteractionDialogAPI dialog, Map<String, MemoryAPI> memoryMap, MemoryAPI local) {
         // Explore starts the fight with the defenders: keep the chance to leave first.
         if (local.getBoolean("$hasDefenders")) return false;
 
-        List<RuleAPI> matches = Global.getSector().getRules().getAllMatching(null, "PopulateSalvageOptions1", dialog, memoryMap);
-        boolean hasExplore = false;
-        for (RuleAPI rule : matches) {
-            if (!VANILLA_EXPLORE_RULES.contains(rule.getId())) return false;
-            if (!"sal_defaultLeave1".equals(rule.getId())) hasExplore = true;
+        OptionPanelAPI options = dialog.getOptionPanel();
+        if (!options.hasOption("salExplore") || !options.hasOption("defaultLeave")) return false;
+        List<?> all = options.getSavedOptionList();
+        if (all == null || all.size() != 2) return false;
+
+        // Another mod can give Explore its own outcome (Nexerelin's scavenger ambush, quest targets): keep the screen.
+        Object previous = local.get("$option");
+        local.set("$option", "salExplore", 0);
+        RuleAPI best;
+        try {
+            best = Global.getSector().getRules().getBestMatching(null, "DialogOptionSelected", dialog, memoryMap);
+        } finally {
+            if (previous != null) local.set("$option", previous, 0);
+            else local.unset("$option");
         }
-        return hasExplore;
+        return best != null && VANILLA_EXPLORE_OUTCOME.equals(best.getId());
     }
 
     private static void checkAccidents(String ruleId, InteractionDialogAPI dialog, Map<String, MemoryAPI> memoryMap) {
