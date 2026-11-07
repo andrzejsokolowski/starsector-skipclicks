@@ -1,0 +1,11 @@
+id,trigger,conditions,script,text,options,notes
+# SkipClicks: one-click survey. A new option only: vanilla's Perform a survey stays.,,,,,,
+skc_fastSurveyOpt,PopulateOptions,"$market.isPlanetConditionMarketOnly
+!$market.isSurveyed
+!HostileFleetNearbyAndAware
+SKC_FastSurvey enabled",SKC_FastSurvey prepare,,1:skc_fastSurvey:Fast survey,
+skc_fastSurveySel,DialogOptionSelected,$option == skc_fastSurvey,SKC_FastSurvey perform,,,
+,,,,,,
+# SkipClicks: salvage. Replaces sal_noHostileNearby and sal_optionCheckAccidents by score; both fall back to the vanilla steps.,,,,,,
+skc_salSkipExplore,SalvageCheckHostile,!HostileFleetNearbyAndAware score:10,SKC_Salvage skipExplore,,,
+skc_salCheckAccidents,DialogOptionSelected,$option == salSalvage score:10,SKC_Salvage checkAccidents,,,

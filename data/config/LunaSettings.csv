@@ -1,0 +1,10 @@
+fieldID,fieldName,fieldType,defaultValue,secondaryValue,fieldDescription,minValue,maxValue,tab
+skc_header_survey,Survey Header,Header,Planet survey,,,,,
+skc_fastSurvey,Fast survey option,Boolean,true,,"Adds a Fast survey option to unsurveyed planets with no colony. One click pays the survey cost and runs the full survey, then shows what was found right in the planet dialog, with any ruins ready to explore.",,,
+skc_fastSurveyLeave,Leave after a fast survey,Boolean,false,,"Closes the planet dialog after a fast survey when the planet has no unexplored ruins. The survey results go to the message log instead.",,,
+skc_header_salvage,Salvage Header,Header,Salvage,,,,,
+skc_skipAssessDebris,Skip Assess on debris fields,Boolean,true,,"Goes straight from a debris field to the salvage cost screen, without the Assess step.",,,
+skc_skipExplore,Skip Explore on derelicts,Boolean,true,,"Goes straight from a derelict, station or cache to the salvage cost screen, without the Explore step. Never skipped when automated defenses guard it, so you can still leave before the fight.",,,
+skc_skipAccident,Skip the accident report,Boolean,true,,"When a salvage accident costs crew or heavy machinery, the loot screen opens right away instead of stopping on the damage report. The losses go to the message log.",,,
+skc_header_battle,Battle Header,Header,After battle,,,,,
+skc_skipBattleContinue,Skip Continue after ship recovery,Boolean,true,,"Continue on the ship recovery screen opens the loot screen right away, instead of stopping on a screen with only Pick through the wreckage. Needs the PatchLib mod. Credits found in the wreckage go to the message log.",,,

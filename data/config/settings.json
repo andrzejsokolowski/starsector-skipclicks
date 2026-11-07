@@ -1,0 +1,4 @@
+{
+	# Rule commands (data/campaign/rules.csv) are looked up in these packages.
+	"ruleCommandPackages": ["skipclicks.rulecmd"],
+}

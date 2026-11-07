@@ -1,0 +1,38 @@
+# SkipClicks
+
+These instructions apply to this repository, including when it is opened without the parent mod workspace.
+The workspace `AGENTS.md` one folder up still governs releases, packaging, Git identity and communication.
+
+## Notion
+
+Tasks, history and test lists: the **SkipClicks board** in Andrzej's Notion, under **Starsector mods**
+(`collection://394eac91-d1c3-4dfe-bbb7-b59a13de4571`). Working rules and game API notes: **Claude
+Information** (`collection://7bf9b1d6-b9e5-4b62-87f1-757bbaa51919`), starting with "Start here: working
+on Starsector mods through Notion". Ticket ids start with SKC. Read the board with
+`notion-query-data-sources` mode `view` on `view://41120ca7-5d20-8147-b70f-000c5b7054c8`. Update the
+board during the work, not only at release time.
+
+## Build
+
+`./gradlew releaseZip` compiles against the game, LunaLib and PatchLib's API jar (`gradle.properties`
+names the game folder), runs the checks and writes `SkipClicks.zip` in this folder.
+
+## Layout
+
+- `data/campaign/rules.csv` - the rules side. `skc_fastSurveyOpt` adds the Fast survey option next to
+  vanilla's Perform a survey. `skc_salSkipExplore` (SalvageCheckHostile, score 10) and
+  `skc_salCheckAccidents` (DialogOptionSelected salSalvage, score 10) outrank vanilla's
+  `sal_noHostileNearby` and `sal_optionCheckAccidents` and fall back to the same vanilla steps.
+- `src/skipclicks/rulecmd/SKC_FastSurvey` - the survey, the same calls as the game's survey screen
+  (`PlanetSurveyPanel.actionPerformed` and `applySurveyResults`): consumed cost, `Misc.setFullySurveyed`,
+  `Misc.addSurveyDataFor`, survey XP, `ListenerUtil.reportPlayerSurveyedPlanet`.
+- `src/skipclicks/rulecmd/SKC_Salvage` - skips Explore or Assess only when the entity has no defenders
+  and every PopulateSalvageOptions1 rule that matches is vanilla's (another mod's option means no skip).
+  Skips the accident report by selecting salPerform after vanilla's `SalvageEntity checkAccidents`.
+- `src/skipclicks/patches/BattleLootPatch` - PatchLib @After on
+  `FleetInteractionDialogPluginImpl.optionSelected` (subtype match, most derived call only): after
+  RECOVERY_CONTINUE, selects CONTINUE_LOOT when it is the only option.
+- `src/skipclicks/Settings` - LunaLib reads with defaults.
+
+PatchLib is optional. Only `skipclicks.patches` may name PatchLib classes (`checkPatchLibIsolated`
+fails the build otherwise), so without PatchLib the patch class is never loaded and the rest works.
