@@ -1,5 +1,6 @@
 {
 	"masterVersionFile":"https://raw.githubusercontent.com/andrzejsokolowski/starsector-skipclicks/main/skipclicks.version",
+	"changelogURL":"https://raw.githubusercontent.com/andrzejsokolowski/starsector-skipclicks/main/changelog.txt",
 	"modName":"SkipClicks",
 	"modThreadId":36277,
 	"modVersion": {

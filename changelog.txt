@@ -1,0 +1,20 @@
+Version 1.0.1 (2026-11-08)
+- The mod now links to its forum thread, so version checkers can point you there.
+
+Version 1.0.0 (2026-11-08)
+- First stable release. No gameplay changes since 0.3.0.
+
+Version 0.3.0 (2026-11-08)
+- New: skip the Continue after a salvage find that asks nothing.
+- New: skip the Continue after beating automated defenses.
+- New: unlocked cargo pods open straight to their contents.
+- Changed: the salvage skips no longer override other mods' rules on the same screens (Secrets of the Frontier, Content Unlocking Missions and others).
+
+Version 0.2.0 (2026-11-08)
+- New: the debris field left by salvaging a station, probe, cache or derelict goes straight into the first loot screen.
+
+Version 0.1.1 (2026-11-07)
+- Fixed: Assess and Explore were never skipped when mods such as Exotica Technologies hook the salvage screen without adding an option.
+
+Version 0.1.0 (2026-11-07)
+- First release.
