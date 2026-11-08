@@ -12,6 +12,8 @@ A Starsector 0.98a mod that cuts the extra clicks out of planet surveys, salvage
   stations and caches without Explore. Never skipped when automated defenses guard the target. When a
   salvage accident costs crew or heavy machinery, the loot screen opens right away instead of stopping
   on the damage report. The losses go to the message log.
+- **Leftover debris**: salvaging a station, probe, cache or other derelict no longer leaves a debris
+  field to scavenge afterwards. Its loot and experience join the first loot screen.
 - **After battle**: Continue on the ship recovery screen opens the loot screen right away, instead of a
   screen with only Pick through the wreckage. Needs [PatchLib](https://github.com/Lukas22041/PatchLib).
 

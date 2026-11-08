@@ -29,6 +29,10 @@ public final class Settings {
         return flag("skc_skipAccident", true);
     }
 
+    public static boolean mergeDebris() {
+        return flag("skc_mergeDebris", true);
+    }
+
     public static boolean skipBattleContinue() {
         return flag("skc_skipBattleContinue", true);
     }

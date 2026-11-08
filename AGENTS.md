@@ -31,6 +31,12 @@ names the game folder), runs the checks and writes `SkipClicks.zip` in this fold
   offers just salExplore and defaultLeave, the entity has no defenders, no mod rule on that trigger has
   its own text, and the best DialogOptionSelected rule for salExplore is vanilla's `sal_noDefenders`.
   Skips the accident report by selecting salPerform after vanilla's `SalvageEntity checkAccidents`.
+- `src/skipclicks/rulecmd/DebrisMerge` - wraps that salSalvage step. Before it, works out one scavenge of
+  the PLAYER_SALVAGE field `convertToDebrisField(FIELD_CONTENT_MULTIPLIER_AFTER_SALVAGE)` would spawn (same
+  drops, seed, density and value recovery as vanilla; one scavenge takes the whole field because
+  FIELD_SALVAGE_FRACTION_PER_ATTEMPT is 1) and adds it to the target's extra salvage. After it, removes the
+  new field and grants its XP (`baseSalvageXP * density`, as ScavengeAbility does). No new field means the
+  salvage did not run there, so the extra loot is taken back.
 - `src/skipclicks/patches/BattleLootPatch` - PatchLib @After on
   `FleetInteractionDialogPluginImpl.optionSelected` (subtype match, most derived call only): after
   RECOVERY_CONTINUE, selects CONTINUE_LOOT when it is the only option.

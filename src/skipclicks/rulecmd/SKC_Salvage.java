@@ -38,7 +38,8 @@ import skipclicks.Settings;
  *
  * checkAccidents replaces vanilla sal_optionCheckAccidents (DialogOptionSelected salSalvage). It runs
  * the vanilla accident check, and when that stops on the damage report ("Continue" to salPerform),
- * it selects salPerform at once and puts the losses in the message log.
+ * it selects salPerform at once and puts the losses in the message log. Around it, DebrisMerge adds the
+ * loot of the debris field the salvage leaves behind and removes that field.
  */
 public class SKC_Salvage extends BaseCommandPlugin {
 
@@ -141,6 +142,18 @@ public class SKC_Salvage extends BaseCommandPlugin {
     }
 
     private static void checkAccidents(String ruleId, InteractionDialogAPI dialog, Map<String, MemoryAPI> memoryMap) {
+        // The leftover debris field goes into this loot. Its targets (stations, probes, caches) are never
+        // debris fields, so vanilla's checkAccidents fires salPerform right away and the salvage runs inside
+        // this call; finish() then finds the spawned field.
+        DebrisMerge merge = Settings.mergeDebris() ? DebrisMerge.prepare(dialog) : null;
+        try {
+            checkAccidentsAndSkip(ruleId, dialog, memoryMap);
+        } finally {
+            if (merge != null) merge.finish();
+        }
+    }
+
+    private static void checkAccidentsAndSkip(String ruleId, InteractionDialogAPI dialog, Map<String, MemoryAPI> memoryMap) {
         SectorEntityToken entity = dialog.getInteractionTarget();
         CargoAPI cargo = Global.getSector().getPlayerFleet().getCargo();
         int crewBefore = cargo.getCrew();

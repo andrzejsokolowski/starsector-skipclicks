@@ -1,4 +1,4 @@
-Subject: [0.98a] SkipClicks 0.1.1 - fewer clicks for surveys, salvage and battle loot
+Subject: [0.98a] SkipClicks 0.2.0 - fewer clicks for surveys, salvage and battle loot
 
 [center][size=28pt][url=https://github.com/andrzejsokolowski/starsector-skipclicks/releases/latest][b]SkipClicks[/b][/url][/size]
 [img]https://raw.githubusercontent.com/andrzejsokolowski/starsector-skipclicks/main/graphics/icons/skipclicks.png[/img]
@@ -26,6 +26,7 @@ Needs LunaLib. PatchLib is optional (only for the after-battle part).
 [li]Debris fields skip Assess, and derelicts, stations and caches skip Explore. You land on the salvage cost screen with Begin salvage operations.[/li]
 [li]Never skipped when automated defenses guard the target, so you can still leave before the fight.[/li]
 [li]When a salvage accident costs crew or heavy machinery, the loot screen opens right away. The losses go to the message log.[/li]
+[li]Salvaging a station, probe, cache or other derelict no longer leaves a debris field to scavenge afterwards. The debris loot and its experience join the first loot screen.[/li]
 [/list]
 
 [hr][center][size=12pt][b]After battle[/b][/size][/center][hr]
@@ -55,6 +56,8 @@ This mod is under the CC0 (Creative Commons Zero) License, allowing you to do wh
 [/spoiler]
 
 [spoiler=Version log]
+[b]0.2.0[/b]
+[list][li]New: the debris field left by salvaging a station, probe, cache or derelict goes straight into the first loot screen.[/li][/list]
 [b]0.1.1[/b]
 [list][li]Fixed: Assess and Explore were never skipped when mods such as Exotica Technologies hook the salvage screen without adding an option.[/li][/list]
 [b]0.1.0[/b]
