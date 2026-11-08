@@ -1,10 +1,11 @@
 {
 	"masterVersionFile":"https://raw.githubusercontent.com/andrzejsokolowski/starsector-skipclicks/main/skipclicks.version",
 	"modName":"SkipClicks",
+	"modThreadId":36277,
 	"modVersion": {
 		"major":1,
 		"minor":0,
-		"patch":0
+		"patch":1
 	},
 	"starsectorVersion":"0.98a-RC8",
 	"directDownloadURL":"https://github.com/andrzejsokolowski/starsector-skipclicks/releases/latest/download/SkipClicks.zip"

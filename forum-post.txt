@@ -1,4 +1,4 @@
-Subject: [0.98a] SkipClicks 1.0.0 - fewer clicks for surveys, salvage, cargo pods and battle loot
+Subject: [0.98a] SkipClicks 1.0.1 - fewer clicks for surveys, salvage, cargo pods and battle loot
 
 [center][size=28pt][url=https://github.com/andrzejsokolowski/starsector-skipclicks/releases/latest][b]SkipClicks[/b][/url][/size]
 [img]https://raw.githubusercontent.com/andrzejsokolowski/starsector-skipclicks/main/graphics/icons/skipclicks.png[/img]
@@ -92,6 +92,8 @@ This mod is under the CC0 (Creative Commons Zero) License, allowing you to do wh
 [/spoiler]
 
 [spoiler=Version log]
+[b]1.0.1[/b]
+[list][li]The mod now links to this forum thread, so version checkers can point you here.[/li][/list]
 [b]1.0.0[/b]
 [list][li]First stable release. No gameplay changes since 0.3.0.[/li][/list]
 [b]0.3.0[/b]
