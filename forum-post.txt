@@ -1,4 +1,4 @@
-Subject: [0.98a] SkipClicks 0.3.0 - fewer clicks for surveys, salvage and battle loot
+Subject: [0.98a] SkipClicks 1.0.0 - fewer clicks for surveys, salvage, cargo pods and battle loot
 
 [center][size=28pt][url=https://github.com/andrzejsokolowski/starsector-skipclicks/releases/latest][b]SkipClicks[/b][/url][/size]
 [img]https://raw.githubusercontent.com/andrzejsokolowski/starsector-skipclicks/main/graphics/icons/skipclicks.png[/img]
@@ -6,39 +6,68 @@ Subject: [0.98a] SkipClicks 0.3.0 - fewer clicks for surveys, salvage and battle
 [/center]
 [center][b]
 WHAT DOES THIS MOD DO?
-Surveying a planet, salvaging a wreck and looting after a battle each take several screens of "Continue".
-SkipClicks cuts the ones that never ask you anything.
+You survey about five planets in every system, and you salvage everything that floats.
+Each of those takes a stack of screens where the only button is "Continue".
+SkipClicks cuts the screens that never ask you anything, and keeps every screen where you choose something.
 Needs LunaLib. PatchLib is optional (only for the after-battle part).
 [/b][/center]
-[center]
-[hr][center][size=12pt][b]Planet survey[/b][/size][/center][hr]
+
+[hr][center][size=12pt][b]Surveying a planet[/b][/size][/center][hr]
+[b]Without SkipClicks:[/b]
+[list type=decimal]
+[li]Open the planet.[/li]
+[li]Perform a survey. The survey screen opens with the cost.[/li]
+[li]Perform survey. A short animation shows the planet's features.[/li]
+[li]Continue. Back to the planet, now with Establish a colony and Leave.[/li]
+[li]Leave, back to the planet's main screen.[/li]
+[li]Leave again.[/li]
+[/list]
+[b]With SkipClicks:[/b]
+[list type=decimal]
+[li]Open the planet.[/li]
+[li]Fast survey. The cost is paid, the survey runs, and the dialog shows the survey data, the conditions and the experience. Explore the ruins and Establish a colony are right there.[/li]
+[/list]
 [list]
-[li]Unsurveyed planets with no colony get a [b]Fast survey[/b] option. It shows the supplies it uses.[/li]
-[li]One click pays the survey cost and runs the full survey. No survey screen, no animation, no Continue.[/li]
-[li]The planet dialog shows the survey data you got, the planet's conditions and the experience, with Establish a colony and Explore the ruins ready to pick.[/li]
+[li]The Fast survey option shows the supplies it uses. It is greyed out, with the missing crew, heavy machinery or supplies in the tooltip, when your fleet lacks them.[/li]
 [li]Same cost, same survey data and same experience as a normal survey. The normal Perform a survey option is still there.[/li]
-[li]Greyed out, with the missing crew, heavy machinery or supplies in the tooltip, when your fleet lacks them.[/li]
 [li]Optional: close the planet dialog after a fast survey when there are no ruins to explore.[/li]
 [/list]
 
-[hr][center][size=12pt][b]Salvage[/b][/size][/center][hr]
+[hr][center][size=12pt][b]Salvaging[/b][/size][/center][hr]
+[b]Without SkipClicks:[/b]
+[list type=decimal]
+[li]Scavenge (or Nexerelin's auto-scavenge). The risk screen opens with Assess and Leave.[/li]
+[li]Assess. Now you see the requirements and the salvage effectiveness, with Begin salvage operations.[/li]
+[li]Begin salvage operations.[/li]
+[li]Sometimes an accident: a damage report with only Continue.[/li]
+[li]The loot screen.[/li]
+[li]A station, probe or cache then turns into a debris field, and you do it all again: scavenge, Assess, Begin salvage operations, loot.[/li]
+[/list]
+[b]With SkipClicks:[/b]
+[list type=decimal]
+[li]Scavenge. You land on the requirements screen right away.[/li]
+[li]Begin salvage operations.[/li]
+[li]The loot screen, with the leftover debris field's loot already in it.[/li]
+[/list]
 [list]
-[li]Debris fields skip Assess, and derelicts, stations and caches skip Explore. You land on the salvage cost screen with Begin salvage operations.[/li]
-[li]Never skipped when automated defenses guard the target, so you can still leave before the fight.[/li]
-[li]When a salvage accident costs crew or heavy machinery, the loot screen opens right away. The losses go to the message log.[/li]
-[li]After a find that asks nothing of you (survey data, a blueprint, a hint about another wreck, cargo), the dialog goes straight on to the salvage cost screen. The find stays in the dialog text.[/li]
-[li]After you beat the automated defenses, no more screen with only Continue.[/li]
-[li]Salvaging a station, probe, cache or other derelict no longer leaves a debris field to scavenge afterwards. The debris loot and its experience join the first loot screen.[/li]
+[li]Debris fields skip Assess. Derelicts, stations and caches skip Explore.[/li]
+[li]Never skipped when automated defenses guard the target, so you can still leave before the fight. After you beat the defenses, no more screen with only Continue.[/li]
+[li]After a salvage find that asks nothing of you (survey data, a blueprint, a hint about another wreck, cargo), the dialog goes on to the requirements screen. The find stays in the dialog text. Finds with a choice, such as survivors, still ask.[/li]
+[li]A salvage accident still costs what it costs. The loss goes to the message log and the loot screen opens right away.[/li]
+[li]The leftover debris gives the same loot and experience as scavenging it yourself, and no debris field is left behind. Demolishing a station still leaves its debris field.[/li]
 [/list]
 
 [hr][center][size=12pt][b]Cargo pods[/b][/size][/center][hr]
+[b]Without SkipClicks:[/b] open the pods, then Examine pod contents, then the contents.
+[b]With SkipClicks:[/b] open the pods, then the contents.
 [list]
-[li]Unlocked cargo pods show their contents right away, without the Examine pod contents step. The usual options are there after you close it.[/li]
+[li]Unlocked pods only. When you close the contents, the usual options are back (such as putting the pods into a stable orbit).[/li]
 [/list]
 
-[hr][center][size=12pt][b]After battle[/b][/size][/center][hr]
+[hr][center][size=12pt][b]After a battle[/b][/size][/center][hr]
+[b]Without SkipClicks:[/b] Continue on the ship recovery screen, then a screen with only Pick through the wreckage, then the loot.
+[b]With SkipClicks (and PatchLib):[/b] Continue on the ship recovery screen, then the loot.
 [list]
-[li]With PatchLib installed: Continue on the ship recovery screen opens the loot screen right away, instead of a screen with only Pick through the wreckage.[/li]
 [li]Credits found in the wreckage go to the message log.[/li]
 [/list]
 
@@ -48,8 +77,8 @@ Needs LunaLib. PatchLib is optional (only for the after-battle part).
 [li]Every skip steps aside when another mod has its own quest, reward or options on that screen.[/li]
 [li]Works with Nexerelin's battle screen.[/li]
 [li]Safe to add to or remove from a game in progress.[/li]
+[li][url=https://github.com/Lukas22041/PatchLib]PatchLib[/url] is only needed for the after-battle skip. Everything else works without it.[/li]
 [/list]
-[/center]
 
 [spoiler=AI use disclaimer]Some or all assets and code in this mod were created using AI tools:
 [list]
@@ -63,6 +92,8 @@ This mod is under the CC0 (Creative Commons Zero) License, allowing you to do wh
 [/spoiler]
 
 [spoiler=Version log]
+[b]1.0.0[/b]
+[list][li]First stable release. No gameplay changes since 0.3.0.[/li][/list]
 [b]0.3.0[/b]
 [list][li]New: skip the Continue after a salvage find that asks nothing.[/li][li]New: skip the Continue after beating automated defenses.[/li][li]New: unlocked cargo pods open straight to their contents.[/li][li]Changed: the salvage skips no longer override other mods' rules on the same screens (Secrets of the Frontier, Content Unlocking Missions and others).[/li][/list]
 [b]0.2.0[/b]
