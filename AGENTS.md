@@ -23,6 +23,14 @@ names the game folder), runs the checks and writes `SkipClicks.zip` in this fold
   vanilla's Perform a survey. `skc_salSkipExplore` (SalvageCheckHostile, score 10) and
   `skc_salCheckAccidents` (DialogOptionSelected salSalvage, score 10) outrank vanilla's
   `sal_noHostileNearby` and `sal_optionCheckAccidents` and fall back to the same vanilla steps.
+- `SKC_Skip check <setting|none> <trigger> [option:<id>] <vanilla rule ids>` (condition, score:100000) is
+  how every skip rule except Fast survey decides to step in: it asks `getBestMatching` for the trigger
+  with SkipClicks' own checks answering false, and is true only when the winner is the named vanilla rule.
+  `SKC_Skip run <trigger> <option> [maxOptions]` runs that vanilla rule (text, script, options) and
+  selects its option like a click. Never put `=<>+-` in an SKC_ command line: `Misc.tokenize` reads them
+  as operators (the build checks this). Skips: Explore/Assess, accident report, salvage find Continue
+  (`SalvageSpecialFinished`), post-defenders Continue (`BeatDefendersContinue`), cargo pods examine
+  (`OpenInteractionDialog`, `pods_start`, unlocked only).
 - `src/skipclicks/rulecmd/SKC_FastSurvey` - the survey, the same calls as the game's survey screen
   (`PlanetSurveyPanel.actionPerformed` and `applySurveyResults`): consumed cost, `Misc.setFullySurveyed`,
   `Misc.addSurveyDataFor`, survey XP, `ListenerUtil.reportPlayerSurveyedPlanet`.

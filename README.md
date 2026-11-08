@@ -12,6 +12,10 @@ A Starsector 0.98a mod that cuts the extra clicks out of planet surveys, salvage
   stations and caches without Explore. Never skipped when automated defenses guard the target. When a
   salvage accident costs crew or heavy machinery, the loot screen opens right away instead of stopping
   on the damage report. The losses go to the message log.
+- **Salvage finds and defenses**: after a find that asks nothing (survey data, a blueprint, a hint about
+  another wreck, cargo) and after beating automated defenses, the dialog goes straight on instead of
+  stopping on a screen with only Continue.
+- **Cargo pods**: unlocked pods show their contents at once, without the Examine pod contents step.
 - **Leftover debris**: salvaging a station, probe, cache or other derelict no longer leaves a debris
   field to scavenge afterwards. Its loot and experience join the first loot screen.
 - **After battle**: Continue on the ship recovery screen opens the loot screen right away, instead of a
@@ -26,6 +30,7 @@ Every skip can be turned off in the LunaLib settings.
 
 ## Compatibility
 
-The survey and salvage parts are rules.csv rules. They add an option or outrank one vanilla rule, and
-fall back to the vanilla steps whenever another mod adds its own salvage options. The after-battle part
+The survey, salvage and cargo pod parts are rules.csv rules. Each one first asks the game which rule
+would run without SkipClicks and only steps in when that is vanilla's own rule, so another mod's quest
+or reward on the same screen runs untouched. The after-battle part
 is a PatchLib patch that runs after the vanilla dialog code and never replaces it.

@@ -150,6 +150,14 @@ tasks.register('checkReleaseFiles') {
             if (!file("src/skipclicks/rulecmd/${command}.java").isFile())
                 problems << "rules.csv names ${command}, but src/skipclicks/rulecmd/${command}.java does not exist"
         }
+        // Misc.tokenize reads any of =<>+- as an operator, which turns an SKC_ command line into a comparison.
+        rules.readLines().each { line ->
+            def m = line =~ /(SKC_[A-Za-z]+[^",]*)/
+            m.each { match ->
+                def cmd = match[1]
+                if (cmd =~ /[=<>+\-]/) problems << "rules.csv command line has an operator character: ${cmd}"
+            }
+        }
 
         if (problems) throw new GradleException("Release files are not ready:\n  " + problems.join('\n  '))
         logger.lifecycle('Release files verified')

@@ -1,4 +1,4 @@
-Subject: [0.98a] SkipClicks 0.2.0 - fewer clicks for surveys, salvage and battle loot
+Subject: [0.98a] SkipClicks 0.3.0 - fewer clicks for surveys, salvage and battle loot
 
 [center][size=28pt][url=https://github.com/andrzejsokolowski/starsector-skipclicks/releases/latest][b]SkipClicks[/b][/url][/size]
 [img]https://raw.githubusercontent.com/andrzejsokolowski/starsector-skipclicks/main/graphics/icons/skipclicks.png[/img]
@@ -26,7 +26,14 @@ Needs LunaLib. PatchLib is optional (only for the after-battle part).
 [li]Debris fields skip Assess, and derelicts, stations and caches skip Explore. You land on the salvage cost screen with Begin salvage operations.[/li]
 [li]Never skipped when automated defenses guard the target, so you can still leave before the fight.[/li]
 [li]When a salvage accident costs crew or heavy machinery, the loot screen opens right away. The losses go to the message log.[/li]
+[li]After a find that asks nothing of you (survey data, a blueprint, a hint about another wreck, cargo), the dialog goes straight on to the salvage cost screen. The find stays in the dialog text.[/li]
+[li]After you beat the automated defenses, no more screen with only Continue.[/li]
 [li]Salvaging a station, probe, cache or other derelict no longer leaves a debris field to scavenge afterwards. The debris loot and its experience join the first loot screen.[/li]
+[/list]
+
+[hr][center][size=12pt][b]Cargo pods[/b][/size][/center][hr]
+[list]
+[li]Unlocked cargo pods show their contents right away, without the Examine pod contents step. The usual options are there after you close it.[/li]
 [/list]
 
 [hr][center][size=12pt][b]After battle[/b][/size][/center][hr]
@@ -38,7 +45,7 @@ Needs LunaLib. PatchLib is optional (only for the after-battle part).
 [hr][center][size=12pt][b]Settings and compatibility[/b][/size][/center][hr]
 [list]
 [li]Every skip has its own switch in the LunaLib settings.[/li]
-[li]The survey and salvage parts step aside when another mod adds its own options to those screens.[/li]
+[li]Every skip steps aside when another mod has its own quest, reward or options on that screen.[/li]
 [li]Works with Nexerelin's battle screen.[/li]
 [li]Safe to add to or remove from a game in progress.[/li]
 [/list]
@@ -56,6 +63,8 @@ This mod is under the CC0 (Creative Commons Zero) License, allowing you to do wh
 [/spoiler]
 
 [spoiler=Version log]
+[b]0.3.0[/b]
+[list][li]New: skip the Continue after a salvage find that asks nothing.[/li][li]New: skip the Continue after beating automated defenses.[/li][li]New: unlocked cargo pods open straight to their contents.[/li][li]Changed: the salvage skips no longer override other mods' rules on the same screens (Secrets of the Frontier, Content Unlocking Missions and others).[/li][/list]
 [b]0.2.0[/b]
 [list][li]New: the debris field left by salvaging a station, probe, cache or derelict goes straight into the first loot screen.[/li][/list]
 [b]0.1.1[/b]

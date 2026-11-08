@@ -6,6 +6,13 @@ skc_fastSurveyOpt,PopulateOptions,"$market.isPlanetConditionMarketOnly
 SKC_FastSurvey enabled",SKC_FastSurvey prepare,,1:skc_fastSurvey:Fast survey,
 skc_fastSurveySel,DialogOptionSelected,$option == skc_fastSurvey,SKC_FastSurvey perform,,,
 ,,,,,,
-# SkipClicks: salvage. Replaces sal_noHostileNearby and sal_optionCheckAccidents by score; both fall back to the vanilla steps.,,,,,,
-skc_salSkipExplore,SalvageCheckHostile,!HostileFleetNearbyAndAware score:10,SKC_Salvage skipExplore,,,
-skc_salCheckAccidents,DialogOptionSelected,$option == salSalvage score:10,SKC_Salvage checkAccidents,,,
+# SkipClicks: salvage and cargo pods. Each rule steps in only where vanilla's rule would have run (SKC_Skip check asks the game which rule wins without SkipClicks); another mod's rule there runs untouched.,,,,,,
+skc_salSkipExplore,SalvageCheckHostile,"!HostileFleetNearbyAndAware
+SKC_Skip check none SalvageCheckHostile sal_noHostileNearby score:100000",SKC_Salvage skipExplore,,,
+skc_salCheckAccidents,DialogOptionSelected,"$option == salSalvage
+SKC_Skip check none DialogOptionSelected option:salSalvage sal_optionCheckAccidents score:100000",SKC_Salvage checkAccidents,,,
+skc_salFindContinue,SalvageSpecialFinished,SKC_Skip check skc_skipFindContinue SalvageSpecialFinished sal_specialFinished score:100000,SKC_Skip run SalvageSpecialFinished salSpecialContinue,,,
+skc_salDefendersContinue,BeatDefendersContinue,SKC_Skip check skc_skipDefendersContinue BeatDefendersContinue sal_continuePostDefenders sal_continuePostDefendersDerelict score:100000,SKC_Skip run BeatDefendersContinue salBeatDefendersContinue,,,
+skc_podsOpen,OpenInteractionDialog,"$customType == cargo_pods
+!$locked
+SKC_Skip check skc_skipPodsExamine OpenInteractionDialog pods_start score:100000",SKC_Skip run OpenInteractionDialog podsOpen 3,,,

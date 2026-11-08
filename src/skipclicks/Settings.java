@@ -37,6 +37,11 @@ public final class Settings {
         return flag("skc_skipBattleContinue", true);
     }
 
+    /** A Boolean setting by key, on by default (rules.csv names its setting in SKC_Skip check). */
+    public static boolean enabled(String key) {
+        return flag(key, true);
+    }
+
     private static boolean flag(String key, boolean fallback) {
         try {
             Boolean value = LunaSettings.getBoolean(MOD_ID, key);
