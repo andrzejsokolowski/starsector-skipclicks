@@ -1,3 +1,6 @@
+Version 1.0.2 (2026-11-09)
+- Fixed: after a salvage find with its own buttons (such as a credit deposit), those buttons stayed on screen next to Continue, and clicking one again showed an error. Sometimes there were two Continue options. Both fixed; the dialog now goes straight on to the salvage cost screen.
+
 Version 1.0.1 (2026-11-08)
 - The mod now links to its forum thread, so version checkers can point you there.
 

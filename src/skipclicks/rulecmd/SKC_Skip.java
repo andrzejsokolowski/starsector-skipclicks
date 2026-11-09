@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.InteractionDialogAPI;
-import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.campaign.rules.MemKeys;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.campaign.rules.RuleAPI;
@@ -29,7 +28,9 @@ import skipclicks.Settings;
  *   SkipClicks' own rules answer false, so they never pick themselves.
  *
  * SKC_Skip run &lt;trigger&gt; &lt;option&gt; [maxOptions]
- *   A script. Runs the vanilla rule that would have won (its text and its script), then, when its option is
+ *   A script. Fires the trigger again through the game's FireBest with SkipClicks' checks off, so the vanilla
+ *   rule that would have won is applied exactly as without SkipClicks (options cleared and replaced, text,
+ *   script). Then, when its option is
  *   there and the panel holds at most maxOptions options (1 by default), selects that option the way a click
  *   would, so every mod's DialogOptionSelected rule for it still runs.
  */
@@ -90,25 +91,19 @@ public class SKC_Skip extends BaseCommandPlugin {
         String option = args.get(2);
         int maxOptions = args.size() > 3 ? Integer.parseInt(args.get(3)) : 1;
 
-        RuleAPI vanilla = bestWithoutSkipClicks(dialog, memoryMap, trigger);
-        if (vanilla == null) return;
-
-        // What the dialog plugin does when a rule fires: its text, then its script, then its options.
-        String text = vanilla.pickText();
-        if (text != null && !text.trim().isEmpty()) {
-            SectorEntityToken target = dialog.getInteractionTarget();
-            text = Global.getSector().getRules().performTokenReplacement(vanilla.getId(), text, target, memoryMap);
-            dialog.getTextPanel().addPara(text);
+        // Let the game's own FireBest apply the vanilla rule, while SkipClicks' checks answer false so it
+        // cannot pick this rule again. FireBest.applyRule clears the options before adding the rule's own,
+        // then prints its text and runs its script. Leftover options (a salvage find's own buttons, an
+        // earlier Continue) must not survive, or they stay clickable with no rule behind them.
+        boolean applied;
+        boolean was = asking;
+        asking = true;
+        try {
+            applied = FireBest.fire(null, dialog, memoryMap, trigger);
+        } finally {
+            asking = was;
         }
-        vanilla.runScript(dialog, memoryMap);
-        if (vanilla.getOptions() != null) {
-            for (com.fs.starfarer.api.campaign.rules.Option o : vanilla.getOptions()) {
-                if (o == null || o.id == null) continue;
-                if (dialog.getOptionPanel().hasOption(o.id)) continue;
-                String label = Global.getSector().getRules().performTokenReplacement(vanilla.getId(), o.text, dialog.getInteractionTarget(), memoryMap);
-                dialog.getOptionPanel().addOption(label, o.id);
-            }
-        }
+        if (!applied) return;
 
         if (!dialog.getOptionPanel().hasOption(option)) return;
         List<?> all = dialog.getOptionPanel().getSavedOptionList();

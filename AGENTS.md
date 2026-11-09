@@ -26,8 +26,10 @@ names the game folder), runs the checks and writes `SkipClicks.zip` in this fold
 - `SKC_Skip check <setting|none> <trigger> [option:<id>] <vanilla rule ids>` (condition, score:100000) is
   how every skip rule except Fast survey decides to step in: it asks `getBestMatching` for the trigger
   with SkipClicks' own checks answering false, and is true only when the winner is the named vanilla rule.
-  `SKC_Skip run <trigger> <option> [maxOptions]` runs that vanilla rule (text, script, options) and
-  selects its option like a click. Never put `=<>+-` in an SKC_ command line: `Misc.tokenize` reads them
+  `SKC_Skip run <trigger> <option> [maxOptions]` fires the trigger again through the real `FireBest`
+  with the checks answering false, so the vanilla rule is applied exactly as without SkipClicks
+  (`applyRule` clears the old options first; leftover buttons from a salvage find otherwise stay
+  clickable with no rule behind them), then selects its option like a click. Never put `=<>+-` in an SKC_ command line: `Misc.tokenize` reads them
   as operators (the build checks this). Skips: Explore/Assess, accident report, salvage find Continue
   (`SalvageSpecialFinished`), post-defenders Continue (`BeatDefendersContinue`), cargo pods examine
   (`OpenInteractionDialog`, `pods_start`, unlocked only).
