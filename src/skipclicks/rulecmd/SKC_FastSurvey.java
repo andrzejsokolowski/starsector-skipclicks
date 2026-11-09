@@ -53,7 +53,7 @@ public class SKC_FastSurvey extends BaseCommandPlugin {
                 case "enabled":
                     return Settings.fastSurvey() && planetOf(dialog) != null;
                 case "prepare":
-                    prepare(dialog);
+                    prepare(dialog, memoryMap);
                     return true;
                 case "perform":
                     perform(dialog, memoryMap);
@@ -115,10 +115,18 @@ public class SKC_FastSurvey extends BaseCommandPlugin {
         return Misc.getAndJoined(parts);
     }
 
-    private static void prepare(InteractionDialogAPI dialog) {
+    private static void prepare(InteractionDialogAPI dialog, Map<String, MemoryAPI> memoryMap) {
         PlanetAPI planet = planetOf(dialog);
         OptionPanelAPI options = dialog.getOptionPanel();
         if (planet == null || !options.hasOption(OPTION)) return;
+
+        // Where the normal survey is switched off or removed (a guarding weapons platform, a quest that keeps
+        // the planet unsurveyed), Fast survey is not offered either.
+        String blocker = SurveyBlockers.blockingRule(dialog, memoryMap);
+        if (blocker != null) {
+            options.removeOption(OPTION);
+            return;
+        }
 
         SurveyPlugin plugin = surveyPlugin(planet);
         CampaignFleetAPI fleet = Global.getSector().getPlayerFleet();
@@ -141,6 +149,13 @@ public class SKC_FastSurvey extends BaseCommandPlugin {
         TextPanelAPI text = dialog.getTextPanel();
         CampaignFleetAPI fleet = Global.getSector().getPlayerFleet();
         CargoAPI cargo = fleet.getCargo();
+
+        // Checked again on the click, in case something changed since the option was drawn.
+        if (SurveyBlockers.blockingRule(dialog, memoryMap) != null) {
+            text.addPara("A survey is not possible here right now.");
+            FireAll.fire(null, dialog, memoryMap, "PopulateOptions");
+            return;
+        }
 
         SurveyPlugin plugin = surveyPlugin(planet);
         if (!missing(plugin, cargo).isEmpty()) {

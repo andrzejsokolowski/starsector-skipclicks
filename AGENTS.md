@@ -35,7 +35,11 @@ names the game folder), runs the checks and writes `SkipClicks.zip` in this fold
   (`OpenInteractionDialog`, `pods_start`, unlocked only).
 - `src/skipclicks/rulecmd/SKC_FastSurvey` - the survey, the same calls as the game's survey screen
   (`PlanetSurveyPanel.actionPerformed` and `applySurveyResults`): consumed cost, `Misc.setFullySurveyed`,
-  `Misc.addSurveyDataFor`, survey XP, `ListenerUtil.reportPlayerSurveyedPlanet`.
+  `Misc.addSurveyDataFor`, survey XP, `ListenerUtil.reportPlayerSurveyedPlanet`. `SurveyBlockers` reads the
+  merged rules.csv once for rules whose script has `SetEnabled surveyPerform false` or `RemoveOption
+  surveyPerform` (vanilla hostiles, IndEvo artillery, JDP, Crab Shack, LOCR); Fast survey is removed where
+  one would fire (PopulateOptions: any match; other triggers: best match). The option panel has no getter
+  for an option's enabled state, so this is the only order-independent way to follow the normal survey.
 - `src/skipclicks/rulecmd/SKC_Salvage` - fires PopulateSalvageOptions1 like vanilla (so script-only mod
   rules such as Exotica's and RapeSector's still run), then skips Explore or Assess only when the screen
   offers just salExplore and defaultLeave, the entity has no defenders, no mod rule on that trigger has

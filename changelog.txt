@@ -1,3 +1,6 @@
+Version 1.0.3 (2026-11-09)
+- Fixed: Fast survey was offered on planets where the normal survey is blocked, such as a planet guarded by an Industrial Evolution artillery platform. It now only appears where Perform a survey is possible.
+
 Version 1.0.2 (2026-11-09)
 - Fixed: after a salvage find with its own buttons (such as a credit deposit), those buttons stayed on screen next to Continue, and clicking one again showed an error. Sometimes there were two Continue options. Both fixed; the dialog now goes straight on to the salvage cost screen.
 

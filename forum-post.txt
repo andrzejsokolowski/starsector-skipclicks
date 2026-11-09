@@ -1,4 +1,4 @@
-Subject: [0.98a] SkipClicks 1.0.2 - fewer clicks for surveys, salvage, cargo pods and battle loot
+Subject: [0.98a] SkipClicks 1.0.3 - fewer clicks for surveys, salvage, cargo pods and battle loot
 
 [center][size=28pt][url=https://github.com/andrzejsokolowski/starsector-skipclicks/releases/latest][b]SkipClicks[/b][/url][/size]
 [img]https://raw.githubusercontent.com/andrzejsokolowski/starsector-skipclicks/main/graphics/icons/skipclicks.png[/img]
@@ -92,6 +92,8 @@ This mod is under the CC0 (Creative Commons Zero) License, allowing you to do wh
 [/spoiler]
 
 [spoiler=Version log]
+[b]1.0.3[/b]
+[list][li]Fixed: Fast survey was offered on planets where the normal survey is blocked, such as a planet guarded by an Industrial Evolution artillery platform. It now only appears where Perform a survey is possible.[/li][/list]
 [b]1.0.2[/b]
 [list][li]Fixed: after a salvage find with its own buttons (such as a credit deposit), those buttons stayed on screen next to Continue, and clicking one again showed an error. Sometimes there were two Continue options. Both fixed; the dialog now goes straight on to the salvage cost screen.[/li][/list]
 [b]1.0.1[/b]
