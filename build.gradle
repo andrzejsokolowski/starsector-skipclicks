@@ -172,7 +172,7 @@ tasks.named('check') {
 // Only what the game loads.
 def releaseFiles = copySpec {
     from(projectDir) {
-        include 'mod_info.json', 'skipclicks.version', 'LICENSE'
+        include 'mod_info.json', 'skipclicks.version', 'LICENSE', 'icon.png'
         include 'data/**', 'graphics/**', 'jars/SkipClicks.jar'
     }
 }

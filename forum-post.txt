@@ -1,5 +1,5 @@
 [center][size=28pt][url=https://github.com/andrzejsokolowski/starsector-skipclicks/releases/latest][b]SkipClicks[/b][/url][/size]
-[img]https://raw.githubusercontent.com/andrzejsokolowski/starsector-skipclicks/main/graphics/icons/skipclicks.png[/img]
+[img width=128]https://raw.githubusercontent.com/andrzejsokolowski/starsector-skipclicks/main/icon.png[/img]
 [url=https://github.com/andrzejsokolowski/starsector-skipclicks/releases/latest][img]https://img.shields.io/github/downloads/andrzejsokolowski/starsector-skipclicks/total?style=for-the-badge&label=download[/img][/url]  [url=https://github.com/andrzejsokolowski/starsector-skipclicks][img]https://img.shields.io/github/v/release/andrzejsokolowski/starsector-skipclicks?display_name=tag&sort=semver&style=for-the-badge&label=source[/img][/url]
 [/center]
 [center][b]
@@ -90,6 +90,8 @@ This mod is under the CC0 (Creative Commons Zero) License, allowing you to do wh
 [/spoiler]
 
 [spoiler=Version log]
+[b]1.0.4[/b]
+[list][li]New gold icon in mod managers (TriOS) and in LunaLib's settings.[/li][/list]
 [b]1.0.3[/b]
 [list][li]Fixed: Fast survey was offered on planets where the normal survey is blocked, such as a planet guarded by an Industrial Evolution artillery platform. It now only appears where Perform a survey is possible.[/li][/list]
 [b]1.0.2[/b]
