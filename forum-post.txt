@@ -9,6 +9,10 @@ Each of those takes a stack of screens where the only button is "Continue".
 SkipClicks cuts the screens that never ask you anything, and keeps every screen where you choose something.
 Needs LunaLib. PatchLib is optional (only for the after-battle part).
 [/b][/center]
+[spoiler=Screenshots]
+[center][img]https://github.com/andrzejsokolowski/starsector-skipclicks/blob/main/screenshots/01-fast-survey-option.webp?raw=true[/img]
+[img]https://github.com/andrzejsokolowski/starsector-skipclicks/blob/main/screenshots/02-fast-survey-result.webp?raw=true[/img][/center]
+[/spoiler]
 
 [hr][center][size=12pt][b]Surveying a planet[/b][/size][/center][hr]
 [b]Without SkipClicks:[/b]
