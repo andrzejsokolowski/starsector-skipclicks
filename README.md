@@ -1,6 +1,6 @@
 # SkipClicks
 
-A Starsector 0.98a mod that cuts the extra clicks out of planet surveys, salvage and battle loot.
+A Starsector 0.98.5a mod that cuts the extra clicks out of planet surveys, salvage and battle loot.
 
 ## What it skips
 

@@ -42,7 +42,7 @@ public final class SurveyBlockers {
     private static final String RULES = "data/campaign/rules.csv";
 
     /**
-     * The blockers in the game's own rules.csv (0.98a-RC8). Not read from the file: "starsector-core" is not a
+     * The blockers in the game's own rules.csv (0.98.5a-RC4). Not read from the file: "starsector-core" is not a
      * mod, so the per-mod reads below cannot reach it, and the game's own rules do not change between launches.
      */
     private static final List<String[]> VANILLA = Arrays.asList(

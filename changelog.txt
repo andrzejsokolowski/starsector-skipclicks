@@ -1,3 +1,6 @@
+Version 1.1.0 (2026-11-15)
+- Updated for Starsector 0.98.5a.
+
 Version 1.0.5 (2026-11-15)
 - Fixed: the game could freeze and close when opening a planet for the first time after starting the game, with many mods installed. SkipClicks now does its survey check while the game loads, and it takes a fraction of a second.
 
