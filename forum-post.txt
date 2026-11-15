@@ -90,6 +90,8 @@ This mod is under the CC0 (Creative Commons Zero) License, allowing you to do wh
 [/spoiler]
 
 [spoiler=Version log]
+[b]1.0.5[/b]
+[list][li]Fixed: the game could freeze and close when opening a planet for the first time after starting the game, with many mods installed. SkipClicks now does its survey check while the game loads, and it takes a fraction of a second.[/li][/list]
 [b]1.0.4[/b]
 [list][li]New gold icon in mod managers (TriOS) and in LunaLib's settings.[/li][/list]
 [b]1.0.3[/b]
